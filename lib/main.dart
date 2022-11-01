@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/app_colors.dart';
+import 'package:pokedex/providers/pokemon.dart';
+import 'package:provider/provider.dart';
 
 import 'screens/home.dart';
 
@@ -17,28 +19,33 @@ class MyApp extends StatelessWidget {
     final textTheme =
         GoogleFonts.pressStart2pTextTheme(Theme.of(context).textTheme);
 
-    return MaterialApp(
-      title: 'Pokedex',
-      theme: ThemeData(
-          primarySwatch: Colors.red,
-          brightness: Brightness.light,
-          appBarTheme: AppBarTheme(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              titleTextStyle: textTheme.headline6),
-          textTheme: textTheme,
-          inputDecorationTheme: InputDecorationTheme(
-              filled: true,
-              fillColor: AppColors.softGrey,
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(48),
-                  borderSide: BorderSide.none))),
-      initialRoute: HomeScreen.routeName,
-      routes: {
-        HomeScreen.routeName: (context) => const HomeScreen(),
-        // '/wild_search':(context) => const WildSearchScreen(),
-        // '/details':(context) => const DetailsScreen(),
-      },
-    );
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider(create: (_) => PokemonProvider()),
+        ],
+        child: MaterialApp(
+          title: 'Pokedex',
+          theme: ThemeData(
+              primarySwatch: Colors.red,
+              brightness: Brightness.light,
+              appBarTheme: AppBarTheme(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  titleTextStyle: textTheme.headline6),
+              textTheme: textTheme,
+              inputDecorationTheme: InputDecorationTheme(
+                  filled: true,
+                  fillColor: AppColors.softGrey,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(48),
+                      borderSide: BorderSide.none)),
+              visualDensity: VisualDensity.adaptivePlatformDensity),
+          initialRoute: HomeScreen.routeName,
+          routes: {
+            HomeScreen.routeName: (context) => const HomeScreen(),
+            // '/wild_search':(context) => const WildSearchScreen(),
+            // '/details':(context) => const DetailsScreen(),
+          },
+        ));
   }
 }
