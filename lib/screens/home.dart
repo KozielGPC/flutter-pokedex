@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:pokedex/models/captured_pokemon.dart';
 import 'package:pokedex/models/pokemon.dart';
 import 'package:pokedex/providers/pokemon.dart';
+import 'package:pokedex/screens/wild_search.dart';
 import 'package:pokedex/widgets/pokemon_card.dart';
 import 'package:provider/provider.dart';
 
@@ -24,7 +25,9 @@ class _HomeScreenState extends State<HomeScreen> {
           title: const Text('Meus Pokemons'),
         ),
         floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, WildSearchScreen.routeName);
+            },
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),

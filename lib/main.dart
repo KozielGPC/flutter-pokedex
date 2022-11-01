@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pokedex/app_colors.dart';
 import 'package:pokedex/providers/pokemon.dart';
+import 'package:pokedex/screens/wild_search.dart';
 import 'package:provider/provider.dart';
 
 import 'screens/home.dart';
@@ -43,7 +44,7 @@ class MyApp extends StatelessWidget {
           initialRoute: HomeScreen.routeName,
           routes: {
             HomeScreen.routeName: (context) => const HomeScreen(),
-            // '/wild_search':(context) => const WildSearchScreen(),
+            WildSearchScreen.routeName:(context) => const WildSearchScreen(),
             // '/details':(context) => const DetailsScreen(),
           },
         ));
