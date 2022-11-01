@@ -22,9 +22,8 @@ class PokemonCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: pokemon.types.first.color,
-        borderRadius: BorderRadius.circular(8)
-        ),
+          color: pokemon.types.first.color,
+          borderRadius: BorderRadius.circular(8)),
       child: Stack(
         children: [
           Positioned(
@@ -41,39 +40,46 @@ class PokemonCard extends StatelessWidget {
             children: [
               Expanded(
                   flex: 2,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AutoSizeText(
-                        '${pokemon.name}\n${pokemon.id.toString()}',
-                        maxLines: 2,
-                        style: const TextStyle(
-                          height: 1.2,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        AutoSizeText(
+                          '${pokemon.name}\n${pokemon.id.toString()}',
+                          maxLines: 2,
+                          style: const TextStyle(
+                            height: 1.2,
+                          ),
+                          minFontSize: 1,
+                          maxFontSize: 10,
                         ),
-                        minFontSize: 1,
-                        maxFontSize: 10,
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Wrap(
-                        spacing: 4,
-                        runSpacing: 4,
-                        children: pokemon.types
-                            .map((t) => CustomChip(type: t))
-                            .toList(),
-                      ),
-                      if (capturedPokemon != null) ...[
-                        const SizedBox(height: 4),
-                        StatsBar(
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Wrap(
+                          spacing: 4,
+                          runSpacing: 4,
+                          children: pokemon.types
+                              .map((t) => CustomChip(type: t))
+                              .toList(),
+                        ),
+                        if (capturedPokemon != null) ...[
+                          const SizedBox(height: 4),
+                          StatsBar(
                             value: capturedPokemon!.hp,
-                            maxValue: pokemon.stats.hp),
-                        const SizedBox(height: 4),
-                        StatsBar(
+                            maxValue: pokemon.stats.hp,
+                            label: 'HP',
+                          ),
+                          const SizedBox(height: 4),
+                          StatsBar(
                             value: capturedPokemon!.xp,
-                            maxValue: pokemon.baseXp),
-                      ]
-                    ],
+                            maxValue: pokemon.baseXp,
+                            label: 'XP',
+                          ),
+                        ]
+                      ],
+                    ),
                   )),
               Expanded(
                   child: CachedNetworkImage(

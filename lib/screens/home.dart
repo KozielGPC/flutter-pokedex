@@ -23,6 +23,21 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           title: const Text('Meus Pokemons'),
         ),
+        floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {},
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+                side: const BorderSide(color: Colors.cyan, width: 3)),
+            icon: const Icon(
+              Icons.search,
+              color: Colors.cyan,
+            ),
+            label: const Text(
+              'Pokemons\nSelvagens',
+              style: TextStyle(color: Colors.grey, fontSize: 8),
+              textAlign: TextAlign.center,
+            )),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(children: [
@@ -35,16 +50,16 @@ class _HomeScreenState extends State<HomeScreen> {
             Expanded(
                 child: ListView.builder(
               itemBuilder: (context, index) {
+                final capturedPokemon = provider.capturedPokemons[index];
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: PokemonCard(
-                    pokemon: provider.getPokemonById(1)!,
-                    capturedPokemon:
-                        CapturedPokemon(hp: 1, id: 1, pokemonId: 1, xp: 1),
-                  ),
+                      pokemon:
+                          provider.getPokemonById(capturedPokemon.pokemonId)!,
+                      capturedPokemon: capturedPokemon),
                 );
               },
-              itemCount: 10,
+              itemCount: provider.capturedPokemons.length,
             ))
           ]),
         ));
